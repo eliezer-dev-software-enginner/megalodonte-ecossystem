@@ -8,7 +8,6 @@ import megalodonte.application.Context;
 import megalodonte.application.MegalodonteApp;
 import my_app.hotreload.HotReload;
 
-
 public class Main {
     static HotReload hotReload;
     static boolean devMode = "true".equals(System.getenv("DEV_MODE"));
@@ -26,10 +25,7 @@ public class Main {
                         .implementationClassName("my_app.hotreload.Reloader")
                         .screenClassName(null)
                         .reloadContext(context)
-                        .classesToExclude(Set.of(
-                                "my_app.Main",
-                                "my_app.Launcher"
-                        ));
+                        .classesToExclude(Set.of("my_app.Main"));
                 hotReload.start();
             }
 

@@ -11,7 +11,7 @@ public class WelcomeScreen implements ScreenComponent {
     @Override
     public Component render() {
         return new Container().children(
-                new Text("Hello world", new TextProps().fontSize(40))
+                new Text("Hello world", new TextProps().fontSize(90))
         );
     }
 }
