@@ -15,4 +15,5 @@
 
 ## Última alteração
 - Adicionado megalodonte-libs como submódulo git do ecossistema
+- Corrigido fontSize não sendo aplicado em TextProps (Props.apply agora chama applyImmediate)
 
