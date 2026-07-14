@@ -19,4 +19,4 @@
 
 ## Após realizar as alterações 
 - compile o código para garantir que o código funciona
-- faça commit: use padrões: feat, refactor, test ou clean
+- faça commit em inglês: use padrões: feat, refactor, test ou clean

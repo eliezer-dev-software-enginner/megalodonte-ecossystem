@@ -2,5 +2,12 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../megalodonte-libs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../megalodonte-libs/megalodonte-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../megalodonte-libs/megalodonte-components" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../megalodonte-libs/megalodonte-reactivity" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../megalodonte-libs/megalodonte-router" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../megalodonte-libs/megalodonte-theme" vcs="Git" />
   </component>
 </project>
