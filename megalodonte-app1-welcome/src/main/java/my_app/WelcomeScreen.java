@@ -5,7 +5,6 @@ import megalodonte.base.components.ScreenComponent;
 import megalodonte.components.Text;
 import megalodonte.components.layout_components.Container;
 import megalodonte.props.TextProps;
-import megalodonte.utils.related.TextVariant;
 
 public class WelcomeScreen implements ScreenComponent {
     @Override
