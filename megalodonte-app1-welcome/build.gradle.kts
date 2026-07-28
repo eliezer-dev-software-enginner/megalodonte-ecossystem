@@ -47,26 +47,35 @@ application {
 }
 
 tasks.named<JavaExec>("run") {
-    val os = System.getProperty("os.name").lowercase()
+    // Reading JAVAFX_MODULES_HOME has to happen in doFirst, not directly in this
+    // configuration block: tasks.named { ... } runs at CONFIGURATION time, which
+    // Gradle triggers just to build the task graph (e.g. `./gradlew tasks`, or an
+    // IDE's Gradle sync) — well before the "run" task actually executes, and
+    // possibly in a process that never inherited the shell's environment. That's
+    // what caused "undefined variable" errors even when it was set in the shell
+    // running `./gradlew run` directly. doFirst only runs when this task executes.
+    doFirst {
+        val os = System.getProperty("os.name").lowercase()
 
-    val javafxModulesHome = System.getenv("JAVAFX_MODULES_HOME")
-        ?: throw GradleException(
-            "Variável de ambiente JAVAFX_MODULES_HOME não definida. " +
-                    "Defina-a apontando para a pasta que contém linux-25.0.1/ e windows-25.0.1/."
+        val javafxModulesHome = System.getenv("JAVAFX_MODULES_HOME")
+            ?: throw GradleException(
+                "Environment variable JAVAFX_MODULES_HOME is not set. " +
+                        "Point it to the folder containing linux-25.0.1/ and windows-25.0.1/."
+            )
+
+        val fxPath = if (os.contains("win")) {
+            "$javafxModulesHome/windows-25.0.1/lib"
+        } else {
+            "$javafxModulesHome/linux-25.0.1/lib"
+        }
+
+        jvmArgs = listOf(
+            "--module-path", fxPath,
+            "--add-modules", "javafx.controls,javafx.graphics",
+            "--enable-native-access=ALL-UNNAMED",
+            "-Dprism.verbose=true"
         )
-
-    val fxPath = if (os.contains("win")) {
-        "$javafxModulesHome/windows-25.0.1/lib"
-    } else {
-        "$javafxModulesHome/linux-25.0.1/lib"
     }
-
-    jvmArgs = listOf(
-        "--module-path", fxPath,
-        "--add-modules", "javafx.controls,javafx.graphics",
-        "--enable-native-access=ALL-UNNAMED",
-        "-Dprism.verbose=true"
-    )
 
     environment("DEV_MODE", "true")
 }
