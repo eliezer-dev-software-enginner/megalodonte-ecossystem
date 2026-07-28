@@ -4,19 +4,14 @@ plugins {
     id("java")
     id("maven-publish")
     id("application")
-
-    // 🛑 CORREÇÃO: Usando o ID e a versão CORRETOS conforme a documentação oficial.
     id("org.openjfx.javafxplugin") version "0.1.0"
-
-    //shadow jar para iconly funcionar
-    //id("com.github.johnrengelman.shadow") version "8.1.1" (NÃO FUNCIONA)
     id("com.gradleup.shadow") version "8.3.5"
 }
 
 val props = Properties()
 file("gradle.properties").inputStream().use { props.load(it) }
 
-group = "plicssw"
+group = "megalodonte_app"
 version = props.getProperty("appVersion")
 
 repositories {
@@ -30,8 +25,6 @@ java {
     }
 }
 
-
-// 🛑 2. CONFIGURA O PLUGIN DO JAVAFX
 javafx {
     version = "25.0.1"
 
@@ -39,19 +32,10 @@ javafx {
 }
 
 dependencies {
-    // Dependências de teste (mantidas)
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
     implementation("megalodonte:megalodonte-base:1.0.0-beta")
     implementation("megalodonte:megalodonte-components:1.0.0-beta")
     implementation("megalodonte:megalodonte-reactivity:1.0.0-beta")
-
-    implementation("org.kordamp.ikonli:ikonli-core:12.4.0")
-    implementation("org.kordamp.ikonli:ikonli-javafx:12.4.0")
-    implementation("org.kordamp.ikonli:ikonli-antdesignicons-pack:12.4.0")
-    implementation("org.kordamp.ikonli:ikonli-entypo-pack:12.4.0")
+    implementation("megalodonte:megalodonte-theme:1.0.0-beta")
 }
 
 tasks.test {
@@ -62,8 +46,33 @@ application {
     mainClass.set(props.getProperty("appMainClass"))
 }
 
+tasks.named<JavaExec>("run") {
+    val os = System.getProperty("os.name").lowercase()
+
+    val javafxModulesHome = System.getenv("JAVAFX_MODULES_HOME")
+        ?: throw GradleException(
+            "Variável de ambiente JAVAFX_MODULES_HOME não definida. " +
+                    "Defina-a apontando para a pasta que contém linux-25.0.1/ e windows-25.0.1/."
+        )
+
+    val fxPath = if (os.contains("win")) {
+        "$javafxModulesHome/windows-25.0.1/lib"
+    } else {
+        "$javafxModulesHome/linux-25.0.1/lib"
+    }
+
+    jvmArgs = listOf(
+        "--module-path", fxPath,
+        "--add-modules", "javafx.controls,javafx.graphics",
+        "--enable-native-access=ALL-UNNAMED",
+        "-Dprism.verbose=true"
+    )
+
+    environment("DEV_MODE", "true")
+}
 
 tasks.shadowJar {
+    dependsOn(tasks.test)
     archiveBaseName.set(props.getProperty("appName"))
     archiveClassifier.set("")
     mergeServiceFiles() // equivalente ao ServicesResourceTransformer
