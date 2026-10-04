@@ -118,14 +118,3 @@ tasks.jar {
     })
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
-
-
-// Configuração de Publicação (mantida)
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-            artifactId = props.getProperty("appName")
-        }
-    }
-}
