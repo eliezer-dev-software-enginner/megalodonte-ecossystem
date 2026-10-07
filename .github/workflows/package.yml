@@ -1,0 +1,23 @@
+name: Package installers
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [megalodonte-app1-welcome, megalodonte-app2-counter, megalodonte-app3-string-lenght, megalodonte-app4-hide-seek, megalodonte-app5-todo-list]
+    uses: eliezer-dev-software-enginner/megalodonte-packaging/.github/workflows/package-javafx.yml@main
+    with:
+      project-directory: ${{ matrix.app }}
+      artifact-name: ${{ matrix.app }}
+      dependencies: ''
+      release: false
+      smoke-test: false

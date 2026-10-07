@@ -15,8 +15,8 @@ group = "megalodonte_app"
 version = props.getProperty("appVersion")
 
 repositories {
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
 }
 
 java {
