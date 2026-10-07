@@ -48,3 +48,7 @@ bin/
 temp
 dist
 /.venv/
+
+/.packaging/
+
+__pycache__/

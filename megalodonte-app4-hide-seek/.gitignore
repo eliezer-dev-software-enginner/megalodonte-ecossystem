@@ -47,3 +47,6 @@ bin/
 
 temp
 dist
+/.packaging/
+
+__pycache__/
