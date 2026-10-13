@@ -2,7 +2,8 @@
 
 Umbrella repo for the Megalodonte framework: a set of small example apps plus the
 [`megalodonte-libs`](megalodonte-libs) submodule (the actual framework libraries —
-`megalodonte-base`, `megalodonte-components`, `megalodonte-reactivity`,
+`megalodonte-core`, `megalodonte-base`, `megalodonte-components`,
+`megalodonte-reactivity`, `megalodonte-reactivity-portable`,
 `megalodonte-router`, `megalodonte-theme` — each its own submodule inside it).
 
 ## Example apps
@@ -15,6 +16,7 @@ Each app is a minimal, focused demo of one part of the framework:
 | [`megalodonte-app2-counter`](megalodonte-app2-counter) | `State<Integer>` + `ReadableState.map(...)`, `Button.onClick(...)` |
 | [`megalodonte-app3-string-lenght`](megalodonte-app3-string-lenght) | `State<String>` bound to an `Input`, derived via `ComputedState` |
 | [`megalodonte-app4-hide-seek`](megalodonte-app4-hide-seek) | `State<Boolean>` + conditional rendering via `Show.when(...)` |
+| [`megalodonte-app5-todo-list`](megalodonte-app5-todo-list) | Reactive list state and a small task workflow |
 
 ## Getting started
 
@@ -55,3 +57,9 @@ Each app also needs the JavaFX SDK modules available locally — see the
 - Base: https://github.com/eliezer-dev-software-enginner/megalodonte-base
 - Reactivity: https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity
 - Theme: https://github.com/eliezer-dev-software-enginner/megalodonte-theme
+
+- Core: https://github.com/eliezer-dev-software-enginner/megalodonte-core
+
+- Portable reactivity: https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity-portable
+
+- Router: https://github.com/eliezer-dev-software-enginner/megalodonte-router
