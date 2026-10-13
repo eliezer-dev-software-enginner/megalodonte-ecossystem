@@ -1,65 +1,26 @@
-# megalodonte-ecossystem
+# Megalodonte example applications
 
-Umbrella repo for the Megalodonte framework: a set of small example apps plus the
-[`megalodonte-libs`](megalodonte-libs) submodule (the actual framework libraries —
-`megalodonte-core`, `megalodonte-base`, `megalodonte-components`,
-`megalodonte-reactivity`, `megalodonte-reactivity-portable`,
-`megalodonte-router`, `megalodonte-theme` — each its own submodule inside it).
-
-## Example apps
-
-Each app is a minimal, focused demo of one part of the framework:
+This repository contains five small native desktop applications that teach the
+Megalodonte framework. Framework libraries are independent repositories, checked
+out directly under `framework/libraries/` in the local workspace. A clone of this
+repository no longer needs Git submodules.
 
 | App | Demonstrates |
-|---|---|
-| [`megalodonte-app1-welcome`](megalodonte-app1-welcome) | Bootstrapping a Megalodonte app — `ThemeManager.setTheme(...)`, `MegalodonteApp.run(...)`, a single `Text` |
-| [`megalodonte-app2-counter`](megalodonte-app2-counter) | `State<Integer>` + `ReadableState.map(...)`, `Button.onClick(...)` |
-| [`megalodonte-app3-string-lenght`](megalodonte-app3-string-lenght) | `State<String>` bound to an `Input`, derived via `ComputedState` |
-| [`megalodonte-app4-hide-seek`](megalodonte-app4-hide-seek) | `State<Boolean>` + conditional rendering via `Show.when(...)` |
-| [`megalodonte-app5-todo-list`](megalodonte-app5-todo-list) | Reactive list state and a small task workflow |
+| --- | --- |
+| [Welcome](megalodonte-app1-welcome/) | Application bootstrap, theme and text |
+| [Counter](megalodonte-app2-counter/) | Reactive state and button actions |
+| [String length](megalodonte-app3-string-lenght/) | Inputs and computed state |
+| [Hide and seek](megalodonte-app4-hide-seek/) | Conditional rendering |
+| [Todo list](megalodonte-app5-todo-list/) | Reactive lists |
 
-## Getting started
+Each example has its own Gradle build and `packaging.toml`. Run
+`bash framework/libraries/install-all.sh` from the Megalodonte workspace root to
+publish the library artifacts locally, then run `bash gradlew test shadowJar` in
+an example directory. The local launcher additionally needs `JAVAFX_MODULES_HOME`
+as described in each example's README.
 
-Clone with submodules (`megalodonte-libs`, and everything inside it):
-
-```bash
-git clone --recurse-submodules git@github.com:eliezer-dev-software-enginner/megalodonte-ecossystem.git
-```
-
-Already cloned without `--recurse-submodules`? Pull them in after the fact:
-
-```bash
-git submodule update --init --recursive
-```
-
-Publish every framework library to Maven local (see
-[`megalodonte-libs/README.md`](megalodonte-libs/README.md) for details):
-
-```bash
-cd megalodonte-libs && ./install-all.sh
-```
-
-Then run any app:
-
-```bash
-cd megalodonte-app1-welcome
-./gradlew run
-```
-
-Each app also needs the JavaFX SDK modules available locally — see the
-"JavaFX Modules Setup" section in [`megalodonte-app1-welcome/README.md`](megalodonte-app1-welcome/README.md).
-
-## Repos
-
-- Ecosystem (this repo): https://github.com/eliezer-dev-software-enginner/megalodonte-ecossystem
-- Libraries monorepo: https://github.com/eliezer-dev-software-enginner/megalodonte-libs
-- Components: https://github.com/eliezer-dev-software-enginner/megalodonte-components
-- Base: https://github.com/eliezer-dev-software-enginner/megalodonte-base
-- Reactivity: https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity
-- Theme: https://github.com/eliezer-dev-software-enginner/megalodonte-theme
-
-- Core: https://github.com/eliezer-dev-software-enginner/megalodonte-core
-
-- Portable reactivity: https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity-portable
-
-- Router: https://github.com/eliezer-dev-software-enginner/megalodonte-router
+The [package workflow](.github/workflows/package.yml) builds every example
+through the reusable workflow in `megalodonte-packaging`. That workflow clones,
+tests and publishes the seven library repositories in dependency order before
+building AppImage, DEB and MSI artifacts for each example. Example builds upload
+CI artifacts without creating five separate GitHub releases.
