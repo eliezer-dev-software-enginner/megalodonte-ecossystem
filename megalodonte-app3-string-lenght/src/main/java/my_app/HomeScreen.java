@@ -12,7 +12,10 @@ import megalodonte.props.ContainerProps;
 public class HomeScreen implements ScreenComponent {
     State<String> textState = new State<>("");
     ComputedState<String> textLenghtComputed = ComputedState.of(
-            ()-> "Size is: " + textState.get().length(), textState
+            () -> {
+                String value = textState.get();
+                return "Size is: " + value.codePointCount(0, value.length());
+            }, textState
     );
 
     @Override
