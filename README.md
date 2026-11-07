@@ -44,7 +44,7 @@ Maven Central. If the matching artifacts are not available, publish the public
 repositories to Maven Local in dependency order:
 
 ```sh
-for repo in megalodonte-core megalodonte-theme megalodonte-base megalodonte-components; do
+for repo in megalodonte-core megalodonte-theme megalodonte-base megalodonte-reactivity megalodonte-components; do
   git clone "https://github.com/eliezer-dev-software-enginner/${repo}.git" || break
   (cd "$repo" && ./gradlew publishToMavenLocal) || break
 done
@@ -59,9 +59,8 @@ cd my-app
 ```
 
 Gradle may download its distribution, JavaFX and other dependencies; launching
-the desktop application requires a graphical environment. These commands use
-the generated application's Gradle tasks, which differ from the legacy example
-projects below.
+the desktop application requires a graphical environment. The reactivity library
+is additionally needed by the interactive examples below.
 
 ## Example applications
 
@@ -84,19 +83,22 @@ each example's `build.gradle.kts`.
 From an example directory, use its included Gradle wrapper:
 
 ```bash
-./gradlew test shadowJar
+./gradlew build
 ./gradlew run
 ```
 
-The `run` task additionally requires `JAVAFX_MODULES_HOME` to point to the
-JavaFX modules described in the example's README. The build scripts select
-Linux or Windows module paths; other operating systems are not configured for
-this task. Each example also has a `packaging.toml`.
+The JavaFX Gradle plugin resolves the required modules; the examples no longer
+require `JAVAFX_MODULES_HOME`. Each example has a `packaging.toml` and follows
+the CLI's distribution layout. The example screen implementations and their
+close-event handling remain specific to each application. Use the CLI-style
+`scripts/package.py` and `packaging.toml` for packaging.
 
 The [package workflow](.github/workflows/package.yml) invokes a reusable
 workflow in `megalodonte-packaging` for each of the five examples when triggered
 manually or by a `v*` tag. Packaging behavior is defined in that external
-workflow.
+workflow. Each example also retains the CLI-generated workflow for use if it is
+copied into its own repository; GitHub Actions in this monorepo runs the workflow
+at the repository root.
 
 ## License
 

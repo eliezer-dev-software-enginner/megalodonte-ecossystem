@@ -1,32 +1,23 @@
-# Only application-specific data; implementation is shared across all clients.
 schema_version = 1
 
 [app]
 name = "Megalodonte Todo List"
-icon_windows = "src/main/resources/assets/app_ico.ico"
-icon_linux = "src/main/resources/assets/app_ico.png"
+version = "0.1.0"
+main_class = "megalodonte_app5_todo_list.Main"
+icon_linux = "src/main/resources/icon.png"
 
 [build]
-mode = "fat-jar"
-tasks = ["clean", "shadowJar"]
-jar = "build/libs/*.jar"
+mode = "distribution"
+tasks = ["installDist"]
+jar = "build/install/megalodonte-app5-todo-list/lib/megalodonte-app5-todo-list-{version}.jar"
 
 [javafx]
 version = "25.0.1"
 
 [runtime]
-modules = ["javafx.controls", "java.sql", "jdk.zipfs", "java.logging", "java.xml", "jdk.charsets"]
-exclude_natives = ["jfxwebkit.dll"]
-
-[windows]
-upgrade_uuid = "45fc94d0-2c8b-5ee7-b8eb-251d3e760ae0"
-per_user = true
+modules = ["javafx.controls", "java.logging", "java.xml", "jdk.charsets"]
+exclude_natives = ["libjfxwebkit.so", "libjfxmedia.so", "jfxwebkit.dll"]
 
 [linux]
 package_name = "megalodonte-app5-todo-list"
 menu_group = "Office"
-
-# Legacy optional launcher; build rejects it if its class is absent.
-[profiles.updater]
-launcher_name = "Megalodonte Todo List Updater"
-launcher_class = "my_app.updater.Main"
