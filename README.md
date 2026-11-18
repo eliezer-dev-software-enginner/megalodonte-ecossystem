@@ -15,14 +15,18 @@ submodules or included in a clone.
 | --- | --- |
 | [CLI](https://github.com/eliezer-dev-software-enginner/megalodonte-cli) | Generate desktop, Android and Roku applications. |
 | [Core](https://github.com/eliezer-dev-software-enginner/megalodonte-core) | Shared state, theme contracts and platform-independent primitives. |
-| [Base](https://github.com/eliezer-dev-software-enginner/megalodonte-base) | Desktop application bootstrap, component contracts, lifecycle and JavaFX integration. |
-| [Components](https://github.com/eliezer-dev-software-enginner/megalodonte-components) | Reusable desktop controls and layouts. |
+| [Base Desktop](https://github.com/eliezer-dev-software-enginner/megalodonte-base) | Desktop application bootstrap, component contracts, lifecycle and JavaFX integration (`megalodonte-base-desktop`). |
+| [Components Desktop](https://github.com/eliezer-dev-software-enginner/megalodonte-components) | Reusable desktop controls and layouts (`megalodonte-components-desktop`). |
 | [Theme](https://github.com/eliezer-dev-software-enginner/megalodonte-theme) | Default theme and a starting point for custom themes. |
-| [Reactivity](https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity) and [portable reactivity](https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity-portable) | Desktop bindings and platform-independent reactive primitives. |
-| [Router](https://github.com/eliezer-dev-software-enginner/megalodonte-router) | Navigation between desktop screens. |
+| [Reactivity Desktop](https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity) and [portable reactivity](https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity-portable) | Desktop bindings (`megalodonte-reactivity-desktop`) and platform-independent reactive primitives. |
+| [Router Desktop](https://github.com/eliezer-dev-software-enginner/megalodonte-router) | Navigation between desktop screens (`megalodonte-router-desktop`). |
 | [JSONC UI](https://github.com/eliezer-dev-software-enginner/megalodonte-jsonc-ui) and [Script App](https://github.com/eliezer-dev-software-enginner/megalodonte-script-app) | Declarative desktop views and their application launcher. |
 | [Android](https://github.com/eliezer-dev-software-enginner/megalodonte-android) and [Roku](https://github.com/eliezer-dev-software-enginner/megalodonte-roku) | Platform-specific application support. |
 | [Packaging](https://github.com/eliezer-dev-software-enginner/megalodonte-packaging) | Packaging tools and reusable workflows for desktop distribution. |
+
+Neutral contracts keep their unsuffixed artifact names. Platform implementations
+end in `-desktop` or `-android`, which prevents Gradle or JPMS from silently selecting
+the wrong renderer while preserving the common Java source API.
 
 ## Create your first desktop application
 
