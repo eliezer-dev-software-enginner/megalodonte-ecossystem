@@ -18,7 +18,7 @@ submodules or included in a clone.
 | [Base Desktop](https://github.com/eliezer-dev-software-enginner/megalodonte-base) | Desktop application bootstrap, component contracts, lifecycle and JavaFX integration (`megalodonte-base-desktop`). |
 | [Components Desktop](https://github.com/eliezer-dev-software-enginner/megalodonte-components) | Reusable desktop controls and layouts (`megalodonte-components-desktop`). |
 | [Theme](https://github.com/eliezer-dev-software-enginner/megalodonte-theme) | Default theme and a starting point for custom themes. |
-| [Reactivity Desktop](https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity) and [portable reactivity](https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity-portable) | Desktop bindings (`megalodonte-reactivity-desktop`) and platform-independent reactive primitives. |
+| [Reactivity Desktop](https://github.com/eliezer-dev-software-enginner/megalodonte-reactivity) | Desktop bindings (`megalodonte-reactivity-desktop`) and the neutral reactive sources compiled directly by the Android base. |
 | [Router Desktop](https://github.com/eliezer-dev-software-enginner/megalodonte-router) | Navigation between desktop screens (`megalodonte-router-desktop`). |
 | [JSONC UI](https://github.com/eliezer-dev-software-enginner/megalodonte-jsonc-ui) and [Script App](https://github.com/eliezer-dev-software-enginner/megalodonte-script-app) | Declarative desktop views and their application launcher. |
 | [Android](https://github.com/eliezer-dev-software-enginner/megalodonte-android) and [Roku](https://github.com/eliezer-dev-software-enginner/megalodonte-roku) | Platform-specific application support. |
