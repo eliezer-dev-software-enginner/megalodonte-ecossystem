@@ -29,6 +29,17 @@ Separe mecanismos genéricos de regras do produto. Um editor ou gerador não dev
 
 Procure usos equivalentes do comportamento defeituoso e corrija os afetados, respeitando diferenças de domínio. Prefira bibliotecas e componentes existentes, verificando a API real antes de usá-la. Ao mudar uma biblioteca consumida localmente, execute seus testes, publique em Maven Local quando esse for o mecanismo de consumo, e confira o artefato atualizado no projeto-alvo. Não rode novamente testes de outras aplicações sem pedido explícito do usuário. `includeBuild` e compilação da fonte não provam que o aplicativo instalado recebeu a mudança.
 
+Quando o ecossistema já possui uma biblioteca orientada a dados para um artefato
+como PDF, reutilize-a e siga o consumidor canônico antes de criar outro gerador.
+No Megalodonte com `pack-utilities`, isso significa `DataPdf` mais template JSONC
+versionado; lógica de domínio prepara dados, enquanto o template controla layout.
+
+Para cores, estilos e capacidades de terminal em CLIs Python, prefira uma
+biblioteca mantida e multiplataforma, como Rich, em vez de sequências ANSI
+implementadas manualmente. Preserve saída limpa quando redirecionada e respeite
+`NO_COLOR`. Em outras linguagens, escolha a integração equivalente sem confundir
+fachada de logging com backend ou renderizador de terminal.
+
 ## Validar o resultado observável
 
 Teste apenas o projeto alterado e o menor percurso que demonstra o requisito: entrada, ação, persistência, reabertura e resultado visível. Para prévia e exportação, confirme que ambas usam o mesmo estado. Para CLI, teste defaults, opções disponíveis e término de entrada multiline. Para integrações, valide o evento e o destino sem afirmar entrega quando só a chamada local foi testada. Respeite restrições do usuário, como não iniciar uma exportação demorada.
@@ -45,7 +56,22 @@ Se o projeto mantiver uma estimativa de progresso, revise-a em cada iteração c
 
 ## Tornar o recurso utilizável e entregar
 
+### Commits locais automáticos
+
+Depois de concluir e validar uma mudança de software autorizada, crie o commit
+local correspondente sem esperar um pedido adicional do usuário. Use uma mensagem
+que descreva o resultado final e inclua somente arquivos pertencentes à tarefa;
+preserve alterações preexistentes ou alheias. Em trabalhos com vários repositórios,
+faça um commit coerente em cada repositório alterado. Se ainda houver trabalho
+autorizado em andamento, faça commits intermediários em marcos estáveis e continue.
+
+O commit automático não autoriza `push`, publicação, release ou deploy. Execute
+essas ações somente quando já estiverem autorizadas e respeite as regras locais
+de horário, branch e aprovação.
+
 Recursos com sintaxe ou sequência não óbvia precisam de um exemplo de uso no README do projeto em uso e, se forem reutilizáveis, no modelo gerado. Na interface, use texto ou tooltip junto ao controle para explicar a ação; mostre o caminho entre clique, gatilho e resposta. Operações longas devem expor progresso, sucesso e erro também nos logs relevantes. Revise documentos antigos que contradigam o comportamento novo.
+
+Quando documentar uma correção por código, inclua o trecho completo necessário para aplicá-la, com imports e a sequência relevante de inicialização, não apenas a declaração isolada. Identifique classes que representam exemplos e preserve as configurações existentes; distinga exemplos ilustrativos daqueles que funcionam diretamente em outro modo ou plataforma.
 
 ### README público e documentação interna
 
